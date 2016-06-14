@@ -14,7 +14,7 @@ class ViewController: UITableViewController {
 
     var numberOfRows = 0
     var namesArray = [String]()
-    var ageArray = [String]()
+    var benefitsArray = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,21 +24,20 @@ class ViewController: UITableViewController {
     
     func parseJSON() {
         
-        let path: String = NSBundle.mainBundle().pathForResource("SampleJSON", ofType: "json") as String!
+        let path: String = NSBundle.mainBundle().pathForResource("Feats_PFRPG_Core", ofType: "json") as String!
         let jsonData = NSData(contentsOfFile: path) as NSData!
         let readableJSON = JSON(data: jsonData, options: NSJSONReadingOptions.MutableContainers, error: nil)
         
-        numberOfRows = readableJSON["People"].count
+        numberOfRows = 15
         
         for i in 1...15 {
-            var Person = "Person"
-            Person += "\(i)"
-            let name = readableJSON["People", Person, "Name"].string! as String!
-            let age = readableJSON["People", Person, "Age"].string! as String!
+            let feat = "\(i)"
+            let name = readableJSON["Feats", feat, "name"].string! as String!
+            let benefit = readableJSON["Feats", feat, "benefit"].string! as String!
             
             print(name)
             namesArray.append(name)
-            ageArray.append(age)
+            benefitsArray.append(benefit)
         }
         
     }
